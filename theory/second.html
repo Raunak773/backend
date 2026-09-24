@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>My HTML Tags Page</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    margin:0;
+    background:#f9f9f9;
+    color:#222;
+}
+
+header{
+    background:#234;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+nav{
+    background:#111;
+    text-align:center;
+    padding:12px;
+}
+
+nav a{
+    color:white;
+    margin:10px;
+    text-decoration:none;
+    padding:6px 12px;
+    border-radius:4px;
+    transition:background 0.3s;
+}
+
+nav a:hover{
+    background:#234;
+}
+
+main{
+    width:90%;
+    max-width:900px;
+    margin:20px auto;
+}
+
+section{
+    background:white;
+    padding:20px;
+    margin:20px 0;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+article{
+    background:#eef3f7;
+    padding:15px;
+    border-left:4px solid #234;
+}
+
+img{
+    width:250px;
+    border-radius:6px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #aaa;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#234;
+    color:white;
+}
+
+input,select,textarea,button{
+    width:100%;
+    padding:10px;
+    margin:7px 0;
+    box-sizing:border-box;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+button{
+    background:#234;
+    color:white;
+    border:0;
+    cursor:pointer;
+    transition:background 0.3s;
+}
+
+button:hover{
+    background:#111;
+}
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+mark{
+    background:yellow;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>HTML Tags</h1>
+<p>Some common HTML tags with improved examples</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+<a href="#blog">Blog</a>
+</nav>
+
+<main>
+
+<section id="home">
+<h2>Home Section</h2>
+<article>
+<p>Welcome to the homepage of this HTML demo. Here we showcase different tags and their usage.</p>
+</article>
+</section>
+
+<section id="about">
+<h2>About Section</h2>
+<article>
+<p>This page demonstrates various HTML tags like text formatting, lists, tables, forms, and media embedding.</p>
+</article>
+</section>
+
+<section id="gallery">
+<h2>Gallery Section</h2>
+<figure>
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg" alt="Indian Flag">
+<figcaption>Flag of India</figcaption>
+</figure>
+<video width="400" controls>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+Your browser does not support video.
+</video>
+</section>
+
+<section id="contact">
+<h2>Contact Section</h2>
+<form>
+<label for="name">Name</label>
+<input type="text" id="name" placeholder="Enter your name">
+<label for="email">Email</label>
+<input type="email" id="email" placeholder="Enter your email">
+<label for="city">City</label>
+<select id="city">
+<option>Jaipur</option>
+<option>Delhi</option>
+<option>Dehradun</option>
+<option>Mumbai</option>
+</select>
+<label for="message">Message</label>
+<textarea id="message" rows="4" placeholder="Write something"></textarea>
+<button type="submit">Submit</button>
+</form>
+</section>
+
+<section id="blog">
+<h2>Blog Section</h2>
+<article>
+<h3>Learning Progress</h3>
+<progress value="70" max="100">70%</progress>
+<p>HTML is the foundation of web development. Once you master it, you can move on to CSS and JavaScript.</p>
+</article>
+</section>
+
+</main>
+
+<footer>
+<p>My HTML Tags Webpage</p>
+<small>Made for learning HTML</small>
+</footer>
+
+</body>
+</html>
