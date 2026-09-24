@@ -11,8 +11,8 @@ async def home(request:Request):
         request=request,
         name="index.html",
         context={
-            "name":"Luckky Singh",
-            "sapid":"590018072",
+            "name":"Parampreet Singh Sara",
+            "sapid":"590015849",
             "batch":"5"
         }
     )
