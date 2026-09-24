@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Notes / Todo App</title>
+<style>
+body { font-family: 'Poppins', sans-serif; background:#f5f6fa; margin:0; }
+header { background:#3f51b5; color:white; text-align:center; padding:20px; }
+main { max-width:700px; margin:30px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+.input-area { display:flex; gap:10px; margin-bottom:20px; }
+input, select { padding:10px; border:1px solid #ccc; border-radius:6px; }
+input { flex:1; }
+button { padding:10px 15px; border:none; border-radius:6px; background:#ff4081; color:white; cursor:pointer; font-weight:600; }
+button:hover { background:#d81b60; }
+ul { list-style:none; padding:0; }
+li { margin:8px 0; padding:10px; border-radius:6px; display:flex; justify-content:space-between; align-items:center; }
+li span { flex:1; }
+li.completed span { text-decoration:line-through; color:gray; }
+.priority-high { background:#ffcdd2; }
+.priority-medium { background:#fff9c4; }
+.priority-low { background:#c8e6c9; }
+.actions button { margin-left:5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Notes / Todo App</h1>
+</header>
+
+<main>
+  <div class="input-area">
+    <input type="text" id="taskInput" placeholder="Enter your task...">
+    <select id="priority">
+      <option value="high">High</option>
+      <option value="medium" selected>Medium</option>
+      <option value="low">Low</option>
+    </select>
+    <button id="addBtn">Add</button>
+    <button id="clearBtn">Clear All</button>
+  </div>
+  <ul id="taskList"></ul>
+</main>
+
+<script>
+function getTasks() {
+  return JSON.parse(localStorage.getItem("tasks")) || [];
+}
+function saveTasks(tasks) {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+function renderTasks() {
+  const tasks = getTasks();
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.classList.add("priority-" + task.priority);
+    if (task.completed) li.classList.add("completed");
+
+    const span = document.createElement("span");
+    span.textContent = task.text;
+    span.onclick = () => {
+      task.completed = !task.completed;
+      saveTasks(tasks);
+      renderTasks();
+    };
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.onclick = () => {
+      const newText = prompt("Edit task:", task.text);
+      if (newText) {
+        task.text = newText;
+        saveTasks(tasks);
+        renderTasks();
+      }
+    };
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.onclick = () => {
+      tasks.splice(index, 1);
+      saveTasks(tasks);
+      renderTasks();
+    };
+
+    actions.appendChild(editBtn);
+    actions.appendChild(delBtn);
+
+    li.appendChild(span);
+    li.appendChild(actions);
+    list.appendChild(li);
+  });
+}
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const priority = document.getElementById("priority").value;
+  const text = input.value.trim();
+  if (text) {
+    const tasks = getTasks();
+    tasks.push({ text, completed: false, priority });
+    saveTasks(tasks);
+    input.value = "";
+    renderTasks();
+  }
+}
+function clearAll() {
+  localStorage.removeItem("tasks");
+  renderTasks();
+}
+document.getElementById("addBtn").addEventListener("click", addTask);
+document.getElementById("clearBtn").addEventListener("click", clearAll);
+renderTasks();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
