@@ -1,0 +1,20 @@
+<%- include('partials/header', { title: 'New post' }) %>
+<h1>New post</h1>
+<% if (errors.length > 0) { %>
+  <ul class="errors" role="alert">
+    <% errors.forEach(function (e) { %><li><%= e %></li><% }) %>
+  </ul>
+<% } %>
+<form class="form" method="POST" action="/posts" novalidate>
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text" value="<%= values.title || '' %>">
+
+  <label for="author">Author</label>
+  <input id="author" name="author" type="text" value="<%= values.author || '' %>">
+
+  <label for="content">Content</label>
+  <textarea id="content" name="content" rows="10"><%= values.content || '' %></textarea>
+
+  <button class="btn" type="submit">Publish post</button>
+</form>
+<%- include('partials/footer') %>
