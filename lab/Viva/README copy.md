@@ -30,29 +30,6 @@ Database: `cms_lab`, collection: `posts`. Both are created automatically on the 
 - `views/partials/`: shared header and footer
 - `public/style.css`: styling
 
-## Screenshot
-Add `screenshot.png` here after running the app (list page with a few posts).
-
-# Simple CMS
-
-A Blog Content Management System built for the Backend Development Lab Examination.
-Stack: **Node.js, Express.js, EJS, MongoDB Node.js Driver** (Option A from the exam sheet).
-
-Users can write a post, see every post listed on the home page, and open any post's
-full content on its own page. Everything is rendered server-side and stored
-permanently in MongoDB.
-
----
-
-## Tech stack
-
-| Layer            | Choice                     |
-| ----------------- | --------------------------- |
-| Runtime           | Node.js                     |
-| Web framework     | Express.js                  |
-| Template engine   | EJS                         |
-| Database          | MongoDB (`mongodb` driver)  |
-| Styling           | Plain CSS, no framework     |
 
 ## Folder structure
 
@@ -148,20 +125,10 @@ brief asks for server-side validation. Solved by adding `novalidate` to the form
 blank submissions actually reach the server, then trimming and checking each field
 there — a field of only spaces is treated as empty.
 
-**8. Stray whitespace-only or object-shaped form fields**
-With `express.urlencoded({ extended: true })`, a crafted field name like `title[$ne]=x`
-arrives as an object instead of a string, which could otherwise reach a MongoDB query.
-Solved by wrapping every field in `String(...)` before validating or storing it.
+**8. Faced issue to upload it on github**
 
-**9. Reusing the header and footer without a native layout system**
-EJS has no built-in "layout" concept like some other engines. Solved by splitting a
-common header and footer into `views/partials/` and pulling them into each page with
-`include()`, instead of duplicating the `<head>` and navigation in three files.
 
-**10. Formatting dates consistently across pages**
-`createdAt` is stored as a BSON `Date` (UTC), but it needs to display readably in
-several templates. Solved by registering one `formatDate` helper on `app.locals`, so
-every view formats dates the same way without repeating the logic.
+
 
 ## Known limitations
 
@@ -170,17 +137,7 @@ every view formats dates the same way without repeating the logic.
 - No CSRF protection or rate limiting on the form.
 - No length limit on title or content.
 
-## Possible improvements
 
-- Add `PUT /posts/:id` (or a POST-based override) to edit posts, and a delete route.
-- Add pagination (`limit`/`skip`, or range-based paging on `createdAt`) once the post count grows.
-- Add an index on `createdAt` to keep the sort fast at scale.
-- Add basic auth so `author` reflects a logged-in user rather than free text.
 
-## Submission checklist
 
-- [x] Complete source code
-- [x] Templates and CSS files
-- [ ] Screenshot of the running app (`screenshot.png`)
-- [x] This README
 
