@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>DOM & Events</title>
+<style>body{font-family:Arial;margin:30px}.box{width:150px;height:80px;background:lightblue;margin:10px 0;display:flex;align-items:center;justify-content:center}</style></head>
+<body>
+<h2 id="title">DOM and Event Handling</h2>
+<input id="inp" placeholder="Type here"> <p id="echo"></p>
+<button id="add">Add item</button> <button id="color">Change colour</button> <button id="rm">Remove last</button>
+<ul id="list"></ul>
+<div class="box" id="box">Hover / double-click me</div>
+<p id="keys">Press any key</p>
+<script>
+const $ = id => document.getElementById(id);
+let count = 0;
+$("add").addEventListener("click", () => {
+  const li = document.createElement("li"); li.textContent = "Item " + (++count);
+  $("list").appendChild(li);
+});
+$("rm").onclick = () => $("list").lastElementChild?.remove();
+$("color").addEventListener("click", () => $("title").style.color = "#" + Math.floor(Math.random() * 16777215).toString(16));
+$("inp").addEventListener("input", e => $("echo").textContent = "You typed: " + e.target.value);
+$("box").addEventListener("mouseover", e => e.target.style.background = "orange");
+$("box").addEventListener("mouseout", e => e.target.style.background = "lightblue");
+$("box").addEventListener("dblclick", () => alert("Double clicked!"));
+document.addEventListener("keydown", e => $("keys").textContent = "Key pressed: " + e.key);
+$("list").addEventListener("click", e => { if (e.target.tagName === "LI") e.target.classList.toggle("done"), e.target.style.textDecoration = "line-through"; }); // event delegation
+</script></body></html>
