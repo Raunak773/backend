@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>AJAX</title></head>
+<body>
+<h2>AJAX demo (run with a local server)</h2>
+<button onclick="loadHTML()">Load HTML</button>
+<button onclick="loadXML()">Load XML</button>
+<button onclick="loadJSON()">Load JSON</button>
+<div id="result"></div>
+<script>
+const res = document.getElementById("result");
+
+function loadHTML() {                       // XMLHttpRequest + HTML
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => { if (xhr.readyState === 4 && xhr.status === 200) res.innerHTML = xhr.responseText; };
+  xhr.open("GET", "snippet.html", true); xhr.send();
+}
+function loadXML() {                        // XMLHttpRequest + XML
+  const xhr = new XMLHttpRequest();
+  xhr.onload = () => {
+    const items = xhr.responseXML.getElementsByTagName("student");
+    let h = "<ul>";
+    for (const s of items) h += `<li>${s.getElementsByTagName("name")[0].textContent} - ${s.getElementsByTagName("course")[0].textContent}</li>`;
+    res.innerHTML = h + "</ul>";
+  };
+  xhr.open("GET", "data.xml"); xhr.send();
+}
+async function loadJSON() {                 // fetch + JSON
+  try {
+    const data = await (await fetch("data.json")).json();
+    res.innerHTML = "<ul>" + data.students.map(s => `<li>${s.name} - ${s.course}</li>`).join("") + "</ul>";
+  } catch (e) { res.textContent = "Error: " + e; }
+}
+</script></body></html>
