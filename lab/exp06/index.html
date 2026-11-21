@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Form Validation</title>
+<style>body{font-family:Arial;max-width:400px;margin:30px auto}input{display:block;width:100%;margin:4px 0;padding:6px}.err{color:red;font-size:13px}</style></head>
+<body>
+<h2>Registration</h2>
+<form id="f" novalidate>
+  <input id="name" placeholder="Name"><div class="err" id="e1"></div>
+  <input id="email" placeholder="Email"><div class="err" id="e2"></div>
+  <input id="phone" placeholder="Phone (10 digits)"><div class="err" id="e3"></div>
+  <input id="pass" type="password" placeholder="Password"><div class="err" id="e4"></div>
+  <input id="cpass" type="password" placeholder="Confirm password"><div class="err" id="e5"></div>
+  <button>Submit</button>
+</form>
+<script>
+const $ = id => document.getElementById(id);
+$("f").addEventListener("submit", e => {
+  e.preventDefault();
+  const checks = [
+    [/^[A-Za-z ]{3,}$/.test($("name").value), "e1", "Name: letters only, min 3"],
+    [/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value), "e2", "Invalid email"],
+    [/^\d{10}$/.test($("phone").value), "e3", "Phone must be 10 digits"],
+    [/^(?=.*[A-Z])(?=.*\d).{8,}$/.test($("pass").value), "e4", "Min 8 chars, 1 capital, 1 digit"],
+    [$("pass").value === $("cpass").value, "e5", "Passwords do not match"]
+  ];
+  let ok = true;
+  checks.forEach(([valid, id, msg]) => { $(id).textContent = valid ? "" : msg; if (!valid) ok = false; });
+  if (ok) alert("Form submitted successfully!");
+});
+</script></body></html>
