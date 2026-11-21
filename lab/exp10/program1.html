@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>jQuery 1 - Effects & DOM</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>#box{width:200px;height:80px;background:teal;color:#fff;padding:10px}</style></head>
+<body>
+<button id="hide">Hide</button> <button id="show">Show</button> <button id="toggle">Slide toggle</button>
+<button id="anim">Animate</button> <button id="addcls">Toggle class</button>
+<div id="box">jQuery box</div>
+<script>
+$(function () {
+  $("#hide").click(() => $("#box").hide(500));
+  $("#show").click(() => $("#box").show(500));
+  $("#toggle").click(() => $("#box").slideToggle());
+  $("#anim").click(() => $("#box").animate({ width: "400px", opacity: 0.5 }, 800).animate({ width: "200px", opacity: 1 }));
+  $("#addcls").click(() => $("#box").toggleClass("highlight").css("background", function () { return $(this).hasClass("highlight") ? "crimson" : "teal"; }));
+});
+</script></body></html>
